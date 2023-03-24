@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # if you dont want to delete the cluster as well as the node then take out the code for deleting the cluster
 
