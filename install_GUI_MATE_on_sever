@@ -1,0 +1,42 @@
+#  this is how to install MATE on proxmox server if you want to.
+
+
+
+#download proxmox iso file
+#use ther program etcher to make boot thumb drive
+
+
+#follow these steps and when install is finished system will reboot to pve prompt
+
+
+#enter root and pw
+
+
+
+#run these commands
+
+
+
+apt-get update;
+adduser ben;            #whatever user you want and create pw
+
+apt-get full-upgrade;
+apt install -y sudo;
+adduser ben sudo;
+apt install -y mate;
+apt install -y lightdm;
+apt install -y chromium;
+apt-get install -y make;
+apt-get install -y build-essential;
+apt-get install -y flex bison;
+
+#and install any other programs wanted
+
+
+#reboot       #should reboot to debian 11 login, login with the user you created not root
+
+
+
+
+
+#open chromium and go to the proxmox IP address you setup when install (ex. 192.168.1.211:8006)
