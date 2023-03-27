@@ -1,0 +1,32 @@
+#download proxmox iso file
+#use ther program etcher to make boot thumb drive
+#select nvme drives in ZFS RAID install
+#follow steps and when install is finished system will reboot to pve prompt
+#enter root and pw
+
+#run these commands
+
+
+apt-get update
+adduser ben                                         #whatever user you want and create pw
+adduser ben sudo
+nano /etc/apt/soures.list.d/pve-enterprise.list     #and put # in front of the code to prevent the enterprise message from showing and save and exit
+apt-get update
+apt-get full-upgrade
+apt install mate
+apt install lightdm
+apt install chromium
+
+#and install any other programs wanted
+
+reboot                                              #should reboot to debian 11 login, login with the user you created not root
+
+#open chromium and go to the proxmox IP address you setup when install (e.x. 192.168.1.211:8006)
+
+#go to datacenter and click on repositories under update and enterprise should be grayed out and unchecked but you can go ahead and click disable too.
+#while there click add and add the no-subscription repository then click reload
+#click update and refresh, it may take a minute to load, then click upgrade
+
+#next go to cluster and create one, then copy the join code and paste it in other nodes so they can join  
+
+
