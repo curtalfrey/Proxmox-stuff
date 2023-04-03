@@ -6,6 +6,27 @@
 
 #run these commands
 
+#if this script in on a usb called BACKUPS
+
+#mkdir /mnt/usb
+#mount /dev/disk/by-label/BACKUPS /mnt/usb
+#cd /mnt/usb/scripts/
+#cp proxmox.sh /root/
+#cd
+#chmod +x proxmox.sh
+#./proxmox.sh
+
+#after running
+#reboot
+
+
+
+
+#this is the script
+
+
+#! bin/bash
+
 
 apt-get update
 adduser ben                                         #whatever user you want and create pw
@@ -16,10 +37,14 @@ apt-get full-upgrade
 apt install mate
 apt install lightdm
 apt install chromium
+apt install libreoffice
+apt install vlc
+apt install gimp
+apt install nodejs
 
 #and install any other programs wanted
 
-reboot                                              #should reboot to debian 11 login, login with the user you created not root
+#reboot                                              #should reboot to debian 11 login, login with the user you created not root
 
 #open chromium and go to the proxmox IP address you setup when install (e.x. 192.168.1.211:8006)
 
