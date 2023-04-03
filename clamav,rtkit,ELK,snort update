@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Stop ClamAV service
+systemctl stop clamav-freshclam.service
+systemctl stop clamav-daemon.service
+
+# Update ClamAV virus signatures
+freshclam
+
+# Start ClamAV service
+systemctl start clamav-daemon.service
+systemctl start clamav-freshclam.service
+
+# Stop Rootkit Hunter service
+systemctl stop rkhunter.service
+
+# Update Rootkit Hunter database and program
+rkhunter --update
+rkhunter --propupd
+
+# Start Rootkit Hunter service
+systemctl start rkhunter.service
+
+# Stop Elasticsearch service
+systemctl stop elasticsearch.service
+
+# Update Elasticsearch
+apt update
+apt upgrade elasticsearch -y
+
+# Start Elasticsearch service
+systemctl start elasticsearch.service
+
+# Stop Kibana service
+systemctl stop kibana.service
+
+# Update Kibana
+apt update
+apt upgrade kibana -y
+
+# Start Kibana service
+systemctl start kibana.service
+
+# Stop Logstash service
+systemctl stop logstash.service
+
+# Update Logstash
+apt update
+apt upgrade logstash -y
+
+# Start Logstash service
+systemctl start logstash.service
+
+# Stop Snort service
+systemctl stop snort.service
+
+# Download and install the latest Snort rules
+wget https://www.snort.org/rules/snortrules-snapshot-<version>.tar.gz
+tar -xvf snortrules-snapshot-<version>.tar.gz -C /usr/local/etc/
+
+# Reload the Snort rules
+snort -R /usr/local/etc/snort/snort.conf
+
+# Start Snort service
+systemctl start snort.service
