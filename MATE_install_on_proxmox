@@ -41,6 +41,57 @@ apt install libreoffice
 apt install vlc
 apt install gimp
 apt install nodejs
+apt install clamav clamav-daemon -y
+apt install rkhunter -y
+rkhunter --update
+rkhunter --propupd
+
+# Install Java Runtime Environment
+apt update
+apt install openjdk-11-jdk -y
+
+# Install Elasticsearch
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+apt update
+apt install elasticsearch -y
+
+# Configure Elasticsearch to start on boot
+systemctl daemon-reload
+systemctl enable elasticsearch
+
+# Install Kibana
+apt install kibana -y
+
+# Configure Kibana to start on boot
+systemctl daemon-reload
+systemctl enable kibana
+
+# Install Logstash
+apt install logstash -y
+
+# Configure Logstash to start on boot
+systemctl daemon-reload
+systemctl enable logstash
+
+# Install required packages
+apt update
+apt install build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev -y
+
+# Download and extract Snort
+wget https://www.snort.org/downloads/snort/snort-2.9.18.1.tar.gz
+tar -xvf snort-2.9.18.1.tar.gz
+cd snort-2.9.18.1
+
+# Configure, compile, and install Snort
+./configure --enable-sourcefire
+make
+make install
+
+# Download and install community rules
+wget https://www.snort.org/rules/community -O community.tar.gz
+tar -xvf community.tar.gz -C /usr/local/etc/
+
 
 #and install any other programs wanted
 
