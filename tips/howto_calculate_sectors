@@ -7,3 +7,19 @@ To calculate the number of sectors needed for a 32GB partition, you can multiply
 32 GB × 2,097,152 sectors/GB = 67,108,864 sectors
 
 So, to create a 32GB partition starting at sector 73402368, you would need to partition 67,108,864 sectors starting at sector 73402368.
+
+
+example
+
+
+To add 32GB to the first sector of an SSD, you need to first convert 32GB to the number of sectors that make up 32GB. The sector size of an SSD can vary, but a common size is 512 bytes per sector. Therefore, 32GB would be equal to:
+
+32GB = 32 * 1024 * 1024 * 1024 bytes
+= 34,359,738,368 bytes
+= 67,108,864 sectors
+
+To get the new sector number, you simply need to add the number of new sectors (67,108,864) to the original sector number (73,400,321):
+
+73,400,321 + 67,108,864 = 140,509,185
+
+Therefore, the new sector number after adding 32GB to the first sector of the SSD is 140,509,185.
