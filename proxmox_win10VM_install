@@ -36,12 +36,33 @@ network model = VIRTIO
 
 confirm
 
-then add another IDE drive for the VIRTIO iso in hardware of the vm
+then add another IDE cdrom drive for the VIRTIO iso in hardware of the vm
 
 make sure boot order is scsi then cdrom in options of the vm
 
 
 start vm 
 and push any button to load from cdrom
+enter key
+
 at storage device screen
-load virt drivers
+and vioscsi = amd64
+load virt drivers for netkvm = amd64
+balloon =amd64
+
+click next
+
+setup windows 
+
+go into device manager and load any drivers from the virtio iso cd rom
+
+and then load the qemu agent 64bit version from the virtio iso cd rom
+
+reboot
+
+then verify the IP info from the summery tab of the vm
+
+
+
+
+ 
