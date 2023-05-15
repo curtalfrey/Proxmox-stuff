@@ -1,0 +1,47 @@
+download win10 iso
+https://www.microsoft.com/en-us/software-download/windows10ISO
+
+
+download windows virtio drivers
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+
+upload both iso's into proxmox local
+
+create VM 
+
+set tabs to these settings;
+
+image = winiso image in OS
+type = windows
+version = 10/2016-2019
+
+machine = q35
+qemu agent = yes
+BIOS = OVMF
+add TPM = yes
+add EFI storage = yes
+
+bus type = SCS1
+size = 250gb
+SSD emulation = yes
+Cache = write back
+discard = yes
+
+cpu's = 6
+
+memory = 16384
+
+network model = VIRTIO
+
+confirm
+
+then add another IDE drive for the VIRTIO iso in hardware of the vm
+
+make sure boot order is scsi then cdrom in options of the vm
+
+
+start vm 
+and push any button to load from cdrom
+at storage device screen
+load virt drivers
