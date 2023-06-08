@@ -29,9 +29,9 @@
 
 
 apt-get update
-adduser ben                                         #whatever user you want and create pw
+adduser ben                                                                #####   whatever user you want and create pw   #####
 adduser ben sudo
-nano /etc/apt/soures.list.d/pve-enterprise.list     #and put # in front of the code to prevent the enterprise message from showing and save and exit
+nano /etc/apt/soures.list.d/pve-enterprise.list                            #and put # in front of the code to prevent the enterprise message from showing and save and exit
 apt-get update
 apt-get full-upgrade
 apt install mate
@@ -46,27 +46,22 @@ apt install rkhunter -y
 rkhunter --update
 rkhunter --propupd
 
-# Install Java Runtime Environment
-apt update
-apt install openjdk-11-jdk -y
 
-# Install required packages
-apt update
-apt install build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev -y
+# Install unattened updates
+apt install unattended-upgrades
+dpkg-reconfigure --priority=low unattended-upgrades
 
+# Create keys
+ssh-keygen -b 4096
 
-
+# Then copy public key to ben@ip address
+# ssh-copy-id ben@ip address
 
 
 
 
 
 # see the IOMMU-config-readme file for details on steps below
-
-
-
-
-
 
 # modify the grub file to enable IOMMU
 nano /etc/default/grub
