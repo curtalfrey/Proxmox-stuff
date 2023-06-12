@@ -1,0 +1,53 @@
+# ssh Harden a VM on proxmox
+
+
+# once the key is copied from the host to the client then edit the sshd_config file to prevent root login and all passwords
+# ben@ip address:~$ sudo nano /etc/ssh/sshd_config
+# remove the # sign in front of Port and change port from 22 to some random high number like 716
+# remove the # sign in front of the word AddessFamily and change any to inet
+# remove the # sign in front of PermitRootLogin prohibit-password
+# remove the # sign in front of PasswordAuthentication and change to no
+# remove the # sign in front of PermitEmptyPasswords and change to no
+
+
+
+#  !!! DONT LOGOUT !!! 
+
+
+
+# open a new terminal and try to ssh into the client, it should fail
+
+# now try to ssh into it adding -p (and the new port number you put in the sshd_config file) 
+# ben@ip address -p 716
+
+# check open ports
+# sudo ss -tupln
+
+# Add the port 716 to the firewall so you can only ssh into that port
+# sudo ufw allow 716
+# sudo ufw status 
+# you should see that port allowed
+
+
+#  !!! DONT LOGOUT !!!
+
+
+
+# now try to ssh into it adding -p (and the new port number you put in the sshd_config file) 
+# ben@ip address -p 716
+
+# add (allow) any and all ports you need open  (any ports not added with the allow command will be blocked once ufw is enabled) 
+
+# enable ufw
+# sudo ufw enable
+
+
+
+# now block pings
+# sudo nano /etc/ufw/before.rules
+# scroll down to this section ---->    # ok icmp codes for INPUT
+# add this line to the top line ---->   -A ufw-before-input -p icmp --icmp-type echo-request -j DROP
+
+
+# reboot for changes to take affect
+# sudo reboot
