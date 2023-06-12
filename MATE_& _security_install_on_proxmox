@@ -1,23 +1,23 @@
-#download proxmox iso file
-#use ther program etcher to make boot thumb drive
-#select nvme drives in ZFS RAID install
-#follow steps and when install is finished system will reboot to pve prompt
-#enter root and pw
+# download proxmox iso file
+# use ther program etcher to make boot thumb drive
+# select nvme drives in ZFS RAID install
+# follow steps and when install is finished system will reboot to pve prompt
+# enter root and pw
 
-#run these commands
+# run these commands
 
-#if this script in on a usb called BACKUPS
+# if this script in on a usb called BACKUPS
 
-#mkdir /mnt/usb
-#mount /dev/disk/by-label/BACKUPS /mnt/usb
-#cd /mnt/usb/scripts/
-#cp proxmox.sh /root/
-#cd
-#chmod +x proxmox.sh
-#./proxmox.sh
+# mkdir /mnt/usb
+# mount /dev/disk/by-label/BACKUPS /mnt/usb
+# cd /mnt/usb/scripts/
+# cp proxmox.sh /root/
+# cd
+# chmod +x proxmox.sh
+# ./proxmox.sh
 
-#after running
-#reboot
+# after running
+# reboot
 
 
 
@@ -118,54 +118,19 @@ ssh-keygen -b 4096
 # sudo reboot
 
 
-#
-
-#
 
 
 
+# and install any other programs wanted
 
+# reboot                                              #should reboot to debian 11 login, login with the user you created not root
 
+# open chromium and go to the proxmox IP address you setup when install (ex. 192.168.1.211:8006)
 
+# go to datacenter and click on repositories under update and enterprise should be grayed out and unchecked but you can go ahead and click disable too.
+# while there click add and add the no-subscription repository then click reload
+# click update and refresh, it may take a minute to load, then click upgrade
 
-
-
-# see the IOMMU-config-readme file for details on steps below
-
-# modify the grub file to enable IOMMU
-# nano /etc/default/grub
-
-# then
-# update-grub
-
-
-
-
-
-# add vfio modules
-sudo nano /etc/modules
-
-# add
-vfio
-vfio_iommu_type1
-vfio_pci
-vfio_virqfd
-
-
-
-
-
-
-#and install any other programs wanted
-
-#reboot                                              #should reboot to debian 11 login, login with the user you created not root
-
-#open chromium and go to the proxmox IP address you setup when install (e.x. 192.168.1.211:8006)
-
-#go to datacenter and click on repositories under update and enterprise should be grayed out and unchecked but you can go ahead and click disable too.
-#while there click add and add the no-subscription repository then click reload
-#click update and refresh, it may take a minute to load, then click upgrade
-
-#next go to cluster and create one, then copy the join code and paste it in other nodes so they can join  
+# next go to cluster and create one, then copy the join code and paste it in other nodes so they can join  
 
 
