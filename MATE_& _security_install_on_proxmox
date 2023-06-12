@@ -55,11 +55,15 @@ dpkg-reconfigure --priority=low unattended-upgrades
 # Create keys
 ssh-keygen -b 4096
 
-# ----------------------------------------------------------------------------------------------------------------------------
 
-# Then copy public key to ben@ip address
+# Then copy public key to other clients/servers if you wnat to ssh into them
 # ssh-copy-id ben@ip address
 
+# then disable root login
+# ben@ip address:~$ sudo nano /etc/ssh/sshd_config
+# remove the # sign in front of PermitRootLogin prohibit-password    (or if it says yes then change it to no)
+
+# ssh Harden a VM on proxmox
 
 
 # once the key is copied from the host to the client then edit the sshd_config file to prevent root login and all passwords
