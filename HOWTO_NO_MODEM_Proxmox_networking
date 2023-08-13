@@ -14,7 +14,7 @@ Created another ethernet connection in the network manager GUI and "shared the c
 
 Set the static IP (ex. 192.168.1.210) and default gateway (ex. 192.168.1.1) making sure to set it to a differnet subnet as my router which is 192.168.0.1
 
-also setting the routers DHCP server to disabled and set it to auto DHCP if needed, most will do it automaticly 
+also setting the routers DHCP server to disabled and set internet connection type to dynamic IP if needed, most will do it automaticly 
 
 Mint shows connected to both the shared ethernet connection and wifi at the same time and router shows good lights that its connected as well 
 
