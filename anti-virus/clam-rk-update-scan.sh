@@ -1,22 +1,23 @@
 #!/bin/bash
 
 # Stop the ClamAV daemon
-systemctl stop clamav-freshclam;
+systemctl stop clamav-freshclam
 
 # Update the virus definitions
-freshclam -d;
+freshclam -d
 
-# Start the ClamAV daemon
-systemctl start clamav-freshclam;
+# Start the ClamAV daemon after updating definitions
+systemctl start clamav-freshclam
 
-# Start the scan
-yes | clamscan -r /;
+# Start the ClamAV scan without requiring Enter key press
+yes | clamscan -r /
 
-#update rkhunter
-rkhunter --propupd;
+# Update rkhunter's properties
+rkhunter --propupd
 
-#check
-yes | rkhunter --check;
+# Start rkhunter check without requiring Enter key press
+yes | rkhunter --check
+
 
 ##################################################
 
