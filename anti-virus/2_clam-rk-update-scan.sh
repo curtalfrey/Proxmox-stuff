@@ -10,7 +10,7 @@ freshclam -d
 systemctl start clamav-freshclam
 
 # Start the ClamAV scan without requiring Enter key press
-yes | clamscan -r /
+yes | clamscan -r / --log=/var/log/clamav/clamscan.log
 
 # Update rkhunter's properties
 rkhunter --propupd
