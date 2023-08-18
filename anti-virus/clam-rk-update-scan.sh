@@ -10,13 +10,13 @@ freshclam -d;
 systemctl start clamav-freshclam;
 
 # Start the scan
-clamscan -r /;
+yes | clamscan -r /;
 
 #update rkhunter
 rkhunter --propupd;
 
 #check
-rkhunter --check;
+yes | rkhunter --check;
 
 ##################################################
 
