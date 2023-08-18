@@ -23,3 +23,6 @@ yes | rkhunter --check
 
 # once you save the above script then make it executable with this command
 #chmod +x clam-rk-update-scan.sh
+
+#put the clam-rk-update-scan.sh in the usres .bashrc
+#/clam-rk-update-scan.sh
