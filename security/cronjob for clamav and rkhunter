@@ -1,5 +1,0 @@
-# Run daily system-wide scan at 2:00am and save logs to files
-0 2 * * * /path/to/system-wide-scan.sh
-
-# Run weekly system-wide scan every Sunday at 3:00am and save logs to files
-0 3 * * 0 /path/to/system-wide-scan.sh
