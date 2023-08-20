@@ -1,14 +1,15 @@
 # Proxmox-stuff
 
-helpful stuff i add when i find it, feel free to add any scripts or commands you find
+This is some helpful stuff i have found, feel free to add any scripts or commands you find
+ 
 
+MATE GUI install for proxmox if you need to work from your server like i do
 
-installing 
+and some needed apps for ubuntu & debian
 
-MATE GUI
-and some needed apps
-
-
+nextcloud
+portainer
+docker
 
 
 
@@ -16,4 +17,4 @@ security apps
 
 clamav 
 RKhunter 
-snort
+
