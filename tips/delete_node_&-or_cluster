@@ -6,23 +6,18 @@
 # first, turn off node you want to remove
 
 
-# Set the node name to be deleted ex. pve1
-NODE_NAME="pve1"
-
-
-
-
-
 
 
 # Remove Node from cluster
 
 pvecm nodes
-pvecm delnode "${NODE_NAME}"
-wait
-reboot
+pvecm delnode pve3
 
-# Wait for the node to come back online
+
+# delete that nodes keys
+nano /etc/pve/priv/known_hosts
+
+reboot
 
 
 
