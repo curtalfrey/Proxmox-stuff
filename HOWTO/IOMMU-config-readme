@@ -2,9 +2,6 @@ website is https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginne
 
 
 
-
-
-
 Ultimate Beginner's Guide to Proxmox GPU Passthrough
 Welcome all, to the first installment of my Idiot Friendly tutorial series! I'll be guiding you through the process of configuring GPU Passthrough for your Proxmox Virtual Machine Guests. This guide is aimed at beginners to virtualization, particularly for Proxmox users. It is intended as an overall guide for passing through a GPU (or multiple GPUs) to your Virtual Machine(s). It is not intended as an all-exhaustive how-to guide; however, I will do my best to provide you with all the necessary resources and sources for the passthrough process, from start to finish. If something doesn't work properly, please check /r/Proxmox, /r/Homelab, r/VFIO, or /r/linux4noobs for further assistance from the community.
 
