@@ -1,0 +1,22 @@
+---
+version: "2.1"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=changeme
+      - CLI_ARGS= #optional
+    volumes:
+      - /duplicati-config:/config
+      - /var/backups/my-docker-volumes:/backups          #where to send the backups            where on the host:where on the container
+      - /website1_db:/source/website1_db                 #backup multiple websites like these and you can add more if needed
+      - /website2_db:/source/website2_db                 #doing it this way you can save db's separately in its own backup job instead of all in one backup
+      - /website3_db:/source/website3_db
+      - /website4_db:/source/website4_db
+      - /portainer-data:/source/portainer-data           #even backup portainer too
+    ports:
+      - 8200:8200
+    restart: always
