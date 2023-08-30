@@ -1,0 +1,81 @@
+Install k0s#
+
+
+Download k0s
+
+
+
+Run the k0s download script to download the latest stable version of k0s and make it executable from /usr/bin/k0s.
+
+
+curl -sSLf https://get.k0s.sh | sudo sh
+
+
+
+Install k0s as a service
+
+The k0s install sub-command installs k0s as a system service on the local host that is running one of the supported init systems: Systemd or OpenRC. You can execute the install for workers, controllers or single node (controller+worker) instances.
+
+
+Run the following command to install a single node k0s that includes the controller and worker functions with the default configuration:
+
+
+sudo k0s install controller --single
+
+
+
+The k0s install controller sub-command accepts the same flags and parameters as the k0s controller. Refer to manual install for a custom config file example.
+
+It is possible to set environment variables with the install command:
+
+sudo k0s install controller -e ETCD_UNSUPPORTED_ARCH=arm
+The system service can be reinstalled with the --force flag:
+
+sudo k0s install controller --single --force
+sudo systemctl daemon-reload
+
+
+
+
+Start k0s as a service
+
+To start the k0s service, run:
+
+sudo k0s start
+
+
+
+
+The k0s service will start automatically after the node restart.
+
+A minute or two typically passes before the node is ready to deploy applications.
+
+Check service, logs and k0s status
+
+
+
+
+
+To get general information about your k0s instance's status, run:
+
+$ sudo k0s status
+Version: v1.27.5+k0s.0
+Process ID: 436
+Role: controller
+Workloads: true
+Init System: linux-systemd
+Access your cluster using kubectl
+
+
+
+
+Note: k0s includes the Kubernetes command-line tool kubectl.
+
+Use kubectl to deploy your application or to check your node status:
+
+
+
+
+$ sudo k0s kubectl get nodes
+NAME   STATUS   ROLES    AGE    VERSION
+k0s    Ready    <none>   4m6s   v1.27.5+k0s
