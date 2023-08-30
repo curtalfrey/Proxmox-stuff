@@ -1,8 +1,13 @@
+#in proxmox download and create debian10 CT template
+
+
 #run these commands
 
 . /etc/os-release
 echo "deb http://deb.debian.org/debian ${VERSION_CODENAME}-backports main" > \
     /etc/apt/sources.list.d/backports.list
+
+
 apt update
 
 
@@ -10,22 +15,29 @@ apt install -t ${VERSION_CODENAME}-backports cockpit --no-install-recommends
 
 
 
+#download
 wget https://github.com/45Drives/cockpit-file-sharing/releases/download/v3.3.2/cockpit-file-sharing_3.3.2-1focal_all.deb
 
 
-
+#download
 wget https://github.com/45Drives/cockpit-navigator/releases/download/v0.5.10/cockpit-navigator_0.5.10-1focal_all.deb
 
-
+#download
 wget https://github.com/45Drives/cockpit-identities/releases/download/v0.1.10/cockpit-identities_0.1.10-1focal_all.deb
 
 
+
+#install
 apt install ./*.deb
 
+
+#remove the downloads
 rm *.deb
 
-# remove the word "root" from the file 
+
+# remove the word "root" from disallowed-users file 
 nano /etc/cockpit/disallowed-users
+
 
 open file browser to IP of CT and port 9090
 login with root
