@@ -18,6 +18,8 @@
       apt:
         name:
           - qemu-system-x86
+          - git          
+          - zsh          
           - wget
           - curl
           - unzip
@@ -36,6 +38,12 @@
       notify:
         - Start and enable services
 
+    - name: Install Oh My Zsh
+      command: sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+      args:
+        warn: false
+      when: ansible_os_family == 'Debian'
+        
   handlers:
     - name: Start and enable services
       systemd:
