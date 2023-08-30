@@ -1,12 +1,19 @@
 # download proxmox iso file
-# use ther program etcher to make boot thumb drive
+
+# use the program "etcher" to make boot thumb drive
+
 # select nvme drives in ZFS RAID install
+
 # follow steps and when install is finished system will reboot to pve prompt
+
 # enter root and pw
+
+
+
 
 # run these commands
 
-# if this script in on a usb called BACKUPS
+# if this script in on a usb (ex. called BACKUPS)
 
 # mkdir /mnt/usb
 # mount /dev/disk/by-label/BACKUPS /mnt/usb
@@ -21,22 +28,18 @@
 
 
 
+                                        ####### this is the script  ##########
 
-
-
-                                         ####### this is the script  ##########
-
-
-
+                                              read it brfore running
 
 
 #! bin/bash
 
 
 apt-get update
-adduser ben                                                                #####   whatever user you want and create pw   #####
-adduser ben sudo
-nano /etc/apt/soures.list.d/pve-enterprise.list                            #and put # in front of the code to prevent the enterprise message from showing and save and exit
+adduser ben                                        #####   whatever user you want and create pw   #####
+adduser ben sudo                                   #try the login after the script is done
+nano /etc/apt/soures.list.d/pve-enterprise.list    #and put # in front of the code to prevent the enterprise message from showing and save and exit
 apt-get update
 apt-get full-upgrade
 apt install mate
@@ -52,36 +55,48 @@ apt install ufw
 rkhunter --update
 rkhunter --propupd
 
+                --------------------------end script--------------------------------
+
+
 
 # Install unattened updates
+
 apt install unattended-upgrades
 dpkg-reconfigure --priority=low unattended-upgrades
 
+
 # Create keys
-ssh-keygen -b 4096
+ssh-keygen -b 4096 -t rsa
 
 
 # Then copy public key to other clients/servers if you wnat to ssh into them
-# ssh-copy-id ben@ip address
+
+#ssh-copy-id ben@ip address
+
+#or
+
+# cat ./.ssh/id_rsa.pub
+
+#copy that key and paste it here
+nano ./.ssh/authorized_keys and add the .pub key
+
 
 # then disable root login
 # ben@ip address:~$ sudo nano /etc/ssh/sshd_config
-# remove the # sign in front of PermitRootLogin prohibit-password    (or if it says yes then change it to no)
 
-
+# remove the # sign in front of PermitRootLogin prohibit-password    
+# remove the # sign in front of PubkeyAuthentication yes
+# remove the # sign in front of AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
+# remove the # sign in front of PasswordAuthentication no
 # reboot for changes to take affect
 # sudo reboot
 
 
 
 
-
-
-
-
 # and install any other programs wanted
 
-# reboot                                              #should reboot to debian 11 login, login with the user you created not root
+#should reboot to debian 11 login, login with the user you created not root
 
 # open chromium and go to the proxmox IP address you setup when install (ex. 192.168.1.211:8006)
 
