@@ -1,0 +1,53 @@
+---
+- name: Update, Upgrade, Install Packages, and Reboot
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: safe
+        autoremove: yes
+        force_apt_get: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - qemu-system-x86
+          - wget
+          - curl
+          - unzip
+          - htop
+          - python3
+          - python3-pip
+          - nfs-common
+          - prometheus-node-exporter
+          - rkhunter
+          - clamav-daemon
+          - clamav
+        state: present
+        update_cache: yes
+        autoremove: yes
+        force_apt_get: yes
+      notify:
+        - Start and enable services
+
+  handlers:
+    - name: Start and enable services
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - clamav-daemon
+        - prometheus-node-exporter
+      listen: "Start and enable services"
+
+    - name: Reboot the system
+      reboot:
+        msg: "Rebooting the system..."
+      listen: "Start and enable services"
