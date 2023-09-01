@@ -1,5 +1,5 @@
 ---
-- name: Update, Upgrade, Install Packages, and Reboot
+- name: Update, Upgrade, Install Packages, and Start QEMU Agent
   hosts: all
   remote_user: root
 
@@ -17,9 +17,8 @@
     - name: Install required packages
       apt:
         name:
-          - qemu-system-x86
-          - git          
-          - zsh          
+          - git
+          - zsh
           - wget
           - curl
           - unzip
@@ -31,6 +30,7 @@
           - rkhunter
           - clamav-daemon
           - clamav
+          - qemu-guest-agent  # If needed for VM management
         state: present
         update_cache: yes
         autoremove: yes
