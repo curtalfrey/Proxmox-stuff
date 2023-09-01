@@ -4,16 +4,19 @@
   remote_user: root
 
   tasks:
+    # Task to update the APT package cache
     - name: Update apt cache
       apt:
         update_cache: yes
 
+    # Task to upgrade all packages safely
     - name: Upgrade all packages
       apt:
         upgrade: safe
         autoremove: yes
         force_apt_get: yes
 
+    # Task to install required packages
     - name: Install required packages
       apt:
         name:
@@ -34,9 +37,11 @@
         update_cache: yes
         autoremove: yes
         force_apt_get: yes
+      # Notify the following task to start and enable services
       notify:
         - Start and enable services
 
+    # Task to start and enable services
     - name: Start and enable services
       systemd:
         name: "{{ item }}"
@@ -45,62 +50,71 @@
       loop:
         - clamav-daemon
         - prometheus-node-exporter
+      # Listen for notification from the previous task
       listen: "Start and enable services"
 
+    # Task to reboot the system
     - name: Reboot the system
       reboot:
         msg: "Rebooting the system..."
+      # Listen for notification from the previous task
       listen: "Start and enable services"
 
 - name: Ensure SSH known_hosts files exist
-  hosts: all  # Target all hosts
-  remote_user: root  # Set the remote user to root
+  hosts: all
+  remote_user: root
 
   tasks:
+    # Task to ensure /home/ansible/.ssh directory exists with appropriate permissions
     - name: Ensure /home/ansible/.ssh directory exists
       ansible.builtin.file:
         path: /home/ansible/.ssh
         state: directory
-        mode: '0700'  # Set permissions as needed
+        mode: '0700'
       tags:
         - ssh_known_hosts
 
+    # Task to ensure /root/.ssh directory exists with appropriate permissions
     - name: Ensure /root/.ssh directory exists
       ansible.builtin.file:
         path: /root/.ssh
         state: directory
-        mode: '0700'  # Set permissions as needed
+        mode: '0700'
       tags:
         - ssh_known_hosts
 
+    # Task to ensure /home/ansible/.ssh/known_hosts file exists with appropriate permissions
     - name: Ensure /home/ansible/.ssh/known_hosts file exists
       ansible.builtin.file:
         path: /home/ansible/.ssh/known_hosts
         state: touch
-        mode: '0600'  # Set permissions as needed
+        mode: '0600'
       tags:
         - ssh_known_hosts
 
+    # Task to ensure /root/.ssh/known_hosts file exists with appropriate permissions
     - name: Ensure /root/.ssh/known_hosts file exists
       ansible.builtin.file:
         path: /root/.ssh/known_hosts
         state: touch
-        mode: '0600'  # Set permissions as needed
+        mode: '0600'
       tags:
         - ssh_known_hosts
 
+    # Task to ensure /etc/ssh directory exists with appropriate permissions
     - name: Ensure /etc/ssh directory exists
       ansible.builtin.file:
         path: /etc/ssh
         state: directory
-        mode: '0755'  # Set permissions as needed
+        mode: '0755'
       tags:
         - ssh_known_hosts
 
+    # Task to ensure /etc/ssh/ssh_known_hosts file exists with appropriate permissions
     - name: Ensure /etc/ssh/ssh_known_hosts file exists
       ansible.builtin.file:
         path: /etc/ssh/ssh_known_hosts
         state: touch
-        mode: '0644'  # Set permissions as needed
+        mode: '0644'
       tags:
         - ssh_known_hosts
