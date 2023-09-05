@@ -1,0 +1,44 @@
+---
+- name: Configure and Update Git Repositories
+  hosts: all
+  remote_user: root
+
+  vars:
+    repositories:
+      - name: repository1
+        path: /path/to/repository1
+      - name: repository2
+        path: /path/to/repository2
+      # Add more repositories as needed
+
+  tasks:
+    - name: Ensure the target directories exist
+      file:
+        path: "{{ item.path }}"
+        state: directory
+        recurse: yes
+      loop: "{{ repositories }}"
+      loop_control:
+        loop_var: repo_item
+
+    - name: Pause for GitHub credentials if private repo
+      pause:
+        prompt: "Enter your GitHub username and password (format: username:password) for '{{ repo_item.name }}': "
+      register: github_credentials
+      when: "'private' in repo_item.name"
+
+    - name: Extract GitHub username and password
+      set_fact:
+        github_username: "{{ github_credentials.user_input.split(':')[0] }}"
+        github_password: "{{ github_credentials.user_input.split(':')[1] }}"
+      when: "'private' in repo_item.name"
+
+    - name: Git Pull from Origin Main for private repo
+      command: git pull origin main
+      args:
+        chdir: "{{ repo_item.path }}"
+      when: "'private' in repo_item.name"
+      environment:
+        GITHUB_USERNAME: "{{ github_username }}"
+        GITHUB_PASSWORD: "{{ github_password }}"
+      no_log: true
