@@ -1,14 +1,19 @@
 #!/bin/bash
 
-# Define variables
+# Enter the github repo's info here, you can add more if you need
 repos=(
     "https://github.com/USERNAME/REPO1.git"
     "https://github.com/USERNAME/REPO2.git"
     "https://github.com/USERNAME/REPO3.git"
 )
-github_dir="/home/ansible/github"
-git_username="YOUR_GIT_USERNAME"
-git_email="YOUR_GIT_EMAIL"
+github_dir="/home/ansible/github"                # path where you want the repo to be on your PC
+git_username="YOUR_GIT_USERNAME"                 # user name
+git_email="YOUR_GIT_EMAIL"                       # your email you use for your repos
+
+
+# do not change data below this line
+#########################################################
+
 
 # Ensure directory exists
 mkdir -p "$github_dir"
