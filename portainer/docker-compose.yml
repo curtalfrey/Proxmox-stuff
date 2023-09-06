@@ -1,0 +1,28 @@
+version: '3.9'
+
+volumes:
+  portainer-data:
+    driver: local
+    name: portainer-data
+
+services:
+  app:
+    container_name: portainer
+    restart: always
+    image: 'portainer/portainer-ee:latest'
+    ports:
+      #- '9000:9000'
+      - '9443:9443'
+      - '8000:8000'
+    networks:
+      - nginx-frontend
+      - nginx-backend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+
+networks:
+    nginx-frontend:
+      external: true
+    nginx-backend:
+      external: true
