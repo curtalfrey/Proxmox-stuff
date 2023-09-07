@@ -1,0 +1,19 @@
+---
+- name: Update and Full-Upgrade All Hosts
+  hosts: all
+  remote_user: root
+  gather_facts: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Full-upgrade all packages
+      apt:
+        upgrade: full
+
+    - name: Clean up unused packages and dependencies
+      apt:
+        autoremove: yes
+        autoclean: yes
