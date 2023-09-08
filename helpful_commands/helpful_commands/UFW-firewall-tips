@@ -1,0 +1,34 @@
+
+ensure that UFW is installed and enabled:
+sudo apt-get update
+sudo apt-get install ufw
+sudo ufw enable
+
+
+
+sudo ufw status verbose
+
+
+
+sudo ufw status
+
+
+
+sudo ufw enable
+
+
+
+sudo ufw default deny incoming
+
+
+
+Allow incoming traffic from the specific network (192.168.0.0/24) on ports 80, 443, and 9443
+sudo ufw allow from 192.168.0.0/24 to any port 80
+sudo ufw allow from 192.168.0.0/24 to any port 443
+sudo ufw allow from 192.168.0.0/24 to any port 9443
+
+
+
+
+Allow incoming traffic from the specific IP address on any port:
+sudo ufw allow from your_ip_address

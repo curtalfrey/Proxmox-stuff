@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Path to the log file to monitor
+LOG_FILE="/var/log/auth.log"
+
+# Define a function to search for failed login attempts
+function search_log() {
+    echo "Searching for failed login attempts..."
+    # Search the log file for failed login attempts
+    failed_attempts=$(grep "Failed password" $LOG_FILE)
+    # Print the failed attempts
+    echo "$failed_attempts"
+}
+
+# Define a function to ban an IP address
+function ban_ip() {
+    # Get the IP address from the user
+    read -p "Enter the IP address to ban: " ip_address
+    # Add a rule to block all traffic from the IP address
+    sudo iptables -A INPUT -s $ip_address -j DROP
+    echo "IP address $ip_address has been banned."
+}
+
+# Call the search_log function to find failed login attempts
+search_log
+
+# Ask the user if they want to ban any of the IPs
+read -p "Do you want to ban any of these IPs? (y/n): " answer
+
+if [ "$answer" == "y" ]; then
+    # Call the ban_ip function to ban the IP
+    ban_ip
+else
+    echo "No IPs will be banned."
+fi
