@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+    networks:
+      - nginx-frontend
+      - nginx-backend
+
+ #     - db
+ #   environment:
+ #     DB_MYSQL_HOST: "db"
+ #     DB_MYSQL_PORT: 3306
+ #     DB_MYSQL_USER: "npm"
+ #     DB_MYSQL_PASSWORD: "123!z2"
+ #     DB_MYSQL_NAME: "npm"
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:81/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+ #   depends_on:
+ #     - db
+
+#  db:
+#    image: 'jc21/mariadb-aria:latest'
+#    container_name: npm-db
+#    restart: always
+#    networks:
+#      - nginx
+#      - db
+#    environment:
+#      MYSQL_ROOT_PASSWORD: '123!z2'
+#      MYSQL_DATABASE: 'npm'
+#      MYSQL_USER: 'npm'
+#      MYSQL_PASSWORD: '123!z2'
+#    volumes:
+#      - ./data/mysql:/var/lib/mysql
+
+networks:
+  nginx-frontend:
+    external: true
+  nginx-backend:
+    external: true
