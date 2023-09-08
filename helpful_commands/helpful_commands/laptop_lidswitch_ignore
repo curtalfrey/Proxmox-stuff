@@ -1,8 +1,0 @@
-
-nano /etc/systemd/logind.conf
-
-#remove the hashtags and set all 3 lidswitch lines=ignore
-
-#save and quit
-
-#laptop should not go to sleep now when you close the lid

@@ -1,3 +1,0 @@
-0 0 * * * tar -cpzf /mnt/my-volume/backups/docker/volumes/docker_volumes_backup_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).tar.gz /var/lib/docker/volumes/;
-
-0 2 * * * /mnt/my-volume/git-repo/scripts/clam-rk-update-scan.sh
