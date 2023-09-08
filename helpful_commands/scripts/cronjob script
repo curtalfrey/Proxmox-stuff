@@ -1,0 +1,16 @@
+#cron jobs
+
+
+#docker container prune
+0 0 * * * /usr/bin/docker container prune;
+#docker container prune
+0 0 * * * /usr/bin/docker volume prune;
+#update
+0 1 * * * apt update && apt upgrade -y && apt autoremove -y && apt autoclean
+
+
+
+
+
+
+

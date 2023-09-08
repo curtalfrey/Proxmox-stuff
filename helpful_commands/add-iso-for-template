@@ -1,0 +1,21 @@
+#from shell of pve
+
+#download the iso
+wget http://cloud-images.ubuntu.com/releases/22.10/release/ubuntu-22.10-server-cloudimg-amd64.img
+
+
+
+              #vmid #file  #storage
+qm disk import 900 ubuntu* local-zfs
+
+go to hardware in the vm and add the disk as scsi single
+enable discard
+
+delete CD
+
+add cloud init 
+set user
+set ssh key
+set ip config
+
+set boot order to scsi first and enabled

@@ -1,0 +1,12 @@
+#Warnings 
+#Requires you know the administrator username.
+#It updates the administrator password and sends an email to the administrator's email address.
+#If you don't receive the email, the password is still changed.
+#You do not need to be logged in to use it. If you could login, you wouldn't need the script.
+#Place this in the root of your WordPress installation. Do not upload this to your WordPress Plugins directory.
+#Delete the script when you are done for security reasons.
+#Directions for use 
+#Save the script below as a file called emergency.php to the root of your WordPress installation (the same directory that contains wp-config.php).
+#In your browser, open http://example.com/emergency.php
+#As instructed, enter the administrator username (usually admin) and the new password, then click Update Options. A message is displayed noting the changed password. An email is sent to the blog administrator with the changed password information.
+#Delete emergency.php from your server when you are done. Do not leave it on your server as someone else could use it to change your password.
