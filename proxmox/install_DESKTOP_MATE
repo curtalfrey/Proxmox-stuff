@@ -48,15 +48,13 @@ apt install chromium
 apt install libreoffice
 apt install vlc
 apt install gimp
-apt install nodejs
 apt install clamav clamav-daemon -y
 apt install rkhunter -y
-apt install ufw 
-rkhunter --update
+ rkhunter --update
 rkhunter --propupd
 
                 --------------------------end script--------------------------------
-
+also install sublime terminator flameshot uget caja 
 
 
 # Install unattened updates
@@ -66,7 +64,7 @@ dpkg-reconfigure --priority=low unattended-upgrades
 
 
 # Create keys
-ssh-keygen -b 4096 -t rsa
+#ssh-keygen -b 4096 -t rsa
 
 
 # Then copy public key to other clients/servers if you wnat to ssh into them
@@ -78,7 +76,7 @@ ssh-keygen -b 4096 -t rsa
 # cat ./.ssh/id_rsa.pub
 
 #copy that key and paste it here
-nano ./.ssh/authorized_keys and add the .pub key
+#nano ./.ssh/authorized_keys and add the .pub key
 
 
 # then disable root login
