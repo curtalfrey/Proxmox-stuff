@@ -1,0 +1,48 @@
+Move all virtual machines out of the node, just use the Central Web-based Management 2.0 to migrate or delete all VM´s. Make sure you have no local backups you want to keep, or save them accordingly.
+Log in to one remaining node via ssh. Issue a pvecm nodes command to identify the nodeID:
+
+
+
+pvecm nodes
+
+
+
+
+Membership information
+----------------------
+    Nodeid      Votes Name
+         1          1 pve
+         2          1 pve1 (local)
+         3          1 pve2
+
+
+Issue the delete command (here deleting node hp2):
+
+
+
+!!! make sure the node is turned off!!!
+
+pvecm delnode pve1
+
+
+
+If the operation succeeds no output is returned, just check the node list again with 'pvecm nodes' (or just 'pvecm n').
+
+delete other nodes if wanted
+
+to delete the cluster run these commands from the manager node
+
+sudo stop pve-cluster
+sudo stop corosync
+sudo pmxcfs -l
+sudo rm /etc/pve/corosync.conf
+sudo rm -r /etc/corosync/*
+sudo killall pmxcfs
+sudo systemctl start pve-cluster
+
+
+sudo pvecm nodes
+
+you should see this error
+Error: Corosync config '/etc/pve/corosync.conf' does not exist - is this node part of a cluster?
+reboot and create another cluster in GUI if wanted
