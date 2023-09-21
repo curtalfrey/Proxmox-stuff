@@ -52,7 +52,13 @@ apt install vlc
 apt install gimp
 apt install clamav clamav-daemon -y
 apt install rkhunter -y
- rkhunter --update
+apt install snapd
+apt install git
+apt install terminator
+apt install flameshot
+apt install sudo
+apt install fdisk
+rkhunter --update
 rkhunter --propupd
 
                 --------------------------end script--------------------------------
