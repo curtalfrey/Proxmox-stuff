@@ -40,6 +40,8 @@ apt-get update
 adduser ben                                        #####   whatever user you want and create pw   #####
 adduser ben sudo                                   #try the login after the script is done
 nano /etc/apt/soures.list.d/pve-enterprise.list    #and put # in front of the code to prevent the enterprise message from showing and save and exit
+# copy and paste this in that file. deb http://download.proxmox.com/debian/pve buster pve-no-subscription
+
 apt-get update
 apt-get full-upgrade
 apt install mate
