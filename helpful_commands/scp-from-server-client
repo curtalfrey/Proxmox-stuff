@@ -1,3 +1,3 @@
 #run from client
 
-sudo scp -r n4s1@192.168.0.200:/media/n4s1/c38ce2b8-f326-4c31-a726-8c7569dbcec3/backups/seagate_backup/Moms-computer-stuff /mnt/family/
+sudo scp user@192.168.0.100:/backups/* /path/to/local/file
