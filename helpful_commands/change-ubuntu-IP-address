@@ -1,0 +1,2 @@
+# change IP address
+sudo editor /etc/netplan/00-installer-config.yaml
