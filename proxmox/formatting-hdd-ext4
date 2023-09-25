@@ -1,0 +1,30 @@
+Here are the steps to mount and access the new 60GB LVM hard drive in Linux Mint VM running on Proxmox:
+
+First, make sure that the new hard drive is detected by the system. You can use the lsblk command to list all the available block devices. Look for the new 60GB hard drive in the output.
+
+If the new hard drive is not already formatted, you can use the fdisk or parted command to create a new partition and format it with a file system such as ext4. For example, if the new hard drive is /dev/sdb, you can run the following commands to create a new partition and format it:
+
+bash
+Copy code
+sudo parted /dev/sdb mklabel msdos
+sudo parted -a opt /dev/sdb mkpart primary ext4 0% 100%
+sudo mkfs.ext4 /dev/sdb1
+Next, create a mount point directory for the new hard drive. For example, you can create a directory called /mnt/newdrive by running the following command:
+bash
+Copy code
+sudo mkdir /mnt/newdrive
+Now, you can mount the new hard drive to the mount point directory using the mount command. For example, if the new hard drive partition is /dev/sdb1, you can run the following command:
+bash
+Copy code
+sudo mount /dev/sdb1 /mnt/newdrive
+To make the mount persistent across reboots, you can add an entry to the /etc/fstab file. For example, you can open the file with a text editor such as nano:
+bash
+Copy code
+sudo nano /etc/fstab
+Add the following line to the end of the file:
+bash
+Copy code
+/dev/sdb1 /mnt/newdrive ext4 defaults 0 2
+Save the file and exit the text editor.
+
+Now, you should be able to access the new hard drive from the /mnt/newdrive directory in your Linux Mint VM.
