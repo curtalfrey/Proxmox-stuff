@@ -1,1 +1,1 @@
-sudo usermod -aG docker n4s1
+sudo usermod -aG docker user
