@@ -25,20 +25,29 @@ Issue the delete command (here deleting node hp2):
 pvecm delnode pve1
 
 
+# delete that nodes keys
+nano /etc/pve/priv/known_hosts
 
 If the operation succeeds no output is returned, just check the node list again with 'pvecm nodes' (or just 'pvecm n').
 
 delete other nodes if wanted
 
+reboot
+
+
 to delete the cluster run these commands from the manager node
 
-sudo stop pve-cluster
-sudo stop corosync
+sudo systemctl stop pve-cluster
+sudo systemctl stop corosync
 sudo pmxcfs -l
 sudo rm /etc/pve/corosync.conf
 sudo rm -r /etc/corosync/*
 sudo killall pmxcfs
 sudo systemctl start pve-cluster
+rm /var/lib/pve-cluster/.pmxcfs.lockfile
+
+# Delete the node's authkey
+rm /etc/corosync/authkey
 
 
 sudo pvecm nodes
