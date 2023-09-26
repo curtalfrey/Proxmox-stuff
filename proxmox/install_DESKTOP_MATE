@@ -51,6 +51,7 @@ apt install mate
 apt install lightdm
 apt install chromium
 apt install libreoffice
+apt install lshw
 apt install vlc
 apt install gimp
 apt install clamav clamav-daemon -y
