@@ -1,0 +1,12 @@
+# install lshw
+apt install lshw
+
+#run 
+lshw -class disk -class storage
+
+copy name, serial,
+sdb  12345
+
+ls -l /dev/disk/by-id/
+
+qm set 101 -scsi1 /dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S6PTNM0T531107H
