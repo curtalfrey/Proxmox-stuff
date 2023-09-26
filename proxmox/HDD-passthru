@@ -1,12 +1,27 @@
+# example passthru HDD to TrueNAS
+
+
 # install lshw
 apt install lshw
 
-#run 
+# run 
 lshw -class disk -class storage
 
-copy name, serial,
+# copy name, serial,
 sdb  12345
 
 ls -l /dev/disk/by-id/
 
+# passthru the HDD
 qm set 101 -scsi1 /dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S6PTNM0T531107H
+
+# repeat for other drives changing the 101 to 102, and the -scsi1 to -scsi2 and the ata ID of the other drives
+
+# copy the VM .conf file before editing it
+cp /etc/pve/qemu-server/101.conf
+
+# add serials at the end of the scsi: lines   size=3445,serial=xyz
+nano /etc/pve/qemu-server/101.conf
+
+start TrueNAS
+
