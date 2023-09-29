@@ -80,6 +80,31 @@ snap install sublime-text --classic
 sudo apt-get install sublime-merge --classic
 
 
+sudo nano sublime-text.desktop
+# enter this code in the file
+
+[Desktop Entry]
+Name=Sublime Text
+Exec=/snap/sublime-text/122/opt/sublime_text/sublime_text
+Icon=/snap/sublime-text/122/opt/sublime_text/Icon/256x256/sublime-text.png
+Type=Application
+Categories=TextEditor;
+
+
+sudo nano sublime-merge.desktop
+# enter this code in the file
+
+[Desktop Entry]
+Name=Sublime Merge
+Exec=/snap/sublime-merge/22/opt/sublime_merge/sublime_merge
+Icon=/snap/sublime-merge/22/opt/sublime_merge/Icon/256x256/sublime-merge.png
+Type=Application
+Categories=TextEditor;
+
+
+
+
+
 # Install unattened updates
 
 apt install unattended-upgrades
