@@ -79,7 +79,7 @@ apt-get install apt-transport-https
 snap install sublime-text --classic
 sudo apt-get install sublime-merge --classic
 
-
+cd /usr/share/applications/
 sudo nano sublime-text.desktop
 # enter this code in the file
 
@@ -101,7 +101,7 @@ Icon=/snap/sublime-merge/22/opt/sublime_merge/Icon/256x256/sublime-merge.png
 Type=Application
 Categories=TextEditor;
 
-
+sudo update-desktop-database /usr/share/applications/
 
 
 
