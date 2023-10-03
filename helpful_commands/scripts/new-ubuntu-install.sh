@@ -194,7 +194,7 @@ apt upgrade -y
 check_and_reboot "Upgrading packages"
 apt autoremove -y
 check_and_reboot "Autoremoving unnecessary packages"
-apt install -y git wget curl unzip htop python3 python3-pip nfs-common prometheus-node-exporter rkhunter clamav-daemon clamav qemu-guest-agent
+apt install -y git wget curl  docker.io docker-compose unzip htop python3 python3-pip nfs-common prometheus-node-exporter rkhunter clamav-daemon clamav qemu-guest-agent
 check_and_reboot "Installing packages"
 
 # Ask if the user wants to reboot
