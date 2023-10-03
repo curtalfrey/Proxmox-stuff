@@ -2,6 +2,8 @@
 
 # Function to add SSH public key to authorized_keys
 add_ssh_public_key() {
+    # Adds the SSH public key from ~/.ssh/id_rsa.pub to ~/.ssh/authorized_keys,
+    # allowing SSH access to the server.
     echo "Adding SSH public key to authorized_keys..."
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
     echo "SSH public key added to authorized_keys file."
@@ -9,7 +11,8 @@ add_ssh_public_key() {
 
 # Function to handle SSH key generation or overwrite
 handle_ssh_keys() {
-    # Check if SSH RSA keys exist
+    # Checks if SSH RSA keys exist. If they do, it offers the option to overwrite them.
+    # If not, it generates new SSH keys. SSH keys provide secure access to the server.
     if [[ -f ~/.ssh/id_rsa && -f ~/.ssh/id_rsa.pub ]]; then
         echo "SSH RSA keys exist."
         read -p "Do you want to overwrite existing SSH keys? (y/n): " overwrite_keys
@@ -31,11 +34,11 @@ handle_ssh_keys() {
 
 # Function to handle changing the hostname
 change_hostname() {
-    # Display the current hostname
+    # Displays the current hostname of the server and allows the user to change it if desired.
+    # Properly setting the hostname helps identify the server on the network.
     current_hostname=$(hostname)
     echo "Current hostname: $current_hostname"
     
-    # Ask if you want to change the hostname
     read -p "Do you want to change the hostname? (y/n): " change_hostname
     if [[ $change_hostname == "y" ]]; then
         read -p "Enter new hostname: " new_hostname
@@ -50,7 +53,9 @@ change_hostname() {
 
 # Function to handle network settings
 edit_network_settings() {
-    # Prompt to edit network settings
+    # Allows the user to edit network settings by opening the network configuration file.
+    # If the file doesn't exist, it creates it with default settings.
+    # Proper network configuration ensures the server can communicate on the network.
     read -p "Do you want to edit network settings? (y/n): " edit_network
     if [[ $edit_network == "y" ]]; then
         if [[ -f /etc/netplan/00-install-config.yaml ]]; then
@@ -93,7 +98,8 @@ edit_network_settings() {
 
 # Function to handle attaching Ubuntu Pro subscription key
 attach_subscription_key() {
-    # Prompt for an Ubuntu Pro subscription key
+    # Prompts the user to enter an Ubuntu Pro subscription key. If provided,
+    # it attaches the key to the server, enabling access to Ubuntu Pro features.
     read -p "Do you have an Ubuntu Pro subscription key? (y/n): " have_subscription_key
     if [[ $have_subscription_key == "y" ]]; then
         read -p "Enter Ubuntu Pro subscription key: " pro_key
@@ -103,6 +109,9 @@ attach_subscription_key() {
 
 # Function to handle adding remote client public keys to authorized_keys
 add_remote_pub_keys() {
+    # Allows the user to paste remote client public keys for SSH access.
+    # It checks for duplicate keys and prompts to replace non-identical keys
+    # with the same user@hostname. This feature enhances security and user management.
     while true; do
         read -p "Do you want to add remote client public keys to authorized_keys file? (y/n): " add_pub_keys
         if [[ $add_pub_keys == "y" ]]; then
@@ -110,7 +119,6 @@ add_remote_pub_keys() {
             temp_pubkeys_file=$(mktemp)
             cat >> "$temp_pubkeys_file"
             
-            # Check for duplicate keys and prompt for replacement
             while read -r pubkey; do
                 if [[ -n "$pubkey" ]]; then
                     userhost=$(ssh-keygen -l -f /dev/stdin <<< "$pubkey" | awk '{print $3}')
@@ -145,6 +153,8 @@ add_remote_pub_keys() {
 
 # Function to install required packages
 install_required_packages() {
+    # Updates the package cache, upgrades existing packages, removes unnecessary packages,
+    # and installs a list of required packages commonly used for server administration and functionality.
     echo "Updating package cache..."
     sudo apt update
     echo "Upgrading packages..."
@@ -157,6 +167,7 @@ install_required_packages() {
 
 # Function to handle system reboot
 reboot_system() {
+    # Asks the user if they want to reboot the system. If confirmed, initiates a system reboot to apply changes.
     read -p "Do you want to reboot the system? (y/n): " reboot_system
     if [[ $reboot_system == "y" ]]; then
         echo "Rebooting the system..."
