@@ -54,8 +54,8 @@ change_hostname() {
 # Function to handle network settings
 edit_network_settings() {
     # Allows the user to edit network settings by opening the network configuration file.
-    # If the file doesn't exist, it creates it with default settings.
-    # Proper network configuration ensures the server can communicate on the network.
+    # If the file doesn't exist, it creates it with default settings. Proper network
+    # configuration ensures the server can communicate on the network.
     read -p "Do you want to edit network settings? (y/n): " edit_network
     if [[ $edit_network == "y" ]]; then
         if [[ -f /etc/netplan/00-install-config.yaml ]]; then
