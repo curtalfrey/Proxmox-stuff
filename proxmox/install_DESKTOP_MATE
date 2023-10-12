@@ -47,28 +47,27 @@ nano /etc/apt/sources.list.d/pve-enterprise.list    #and put # in front of the c
 
 apt-get update
 apt-get full-upgrade
-apt install mate
-apt install lightdm
-apt install chromium
-apt install libreoffice
-apt install vlc
-apt install lshw
-apt install gimp
+apt install mate -y
+apt install lightdm -y
+apt install chromium -y
+apt install libreoffice -y
+apt install vlc -y
+apt install lshw -y
+apt install gimp -y
 apt install clamav clamav-daemon -y
 apt install rkhunter -y
-apt install snapd
-apt install snap core
-apt install git
-apt install terminator
-apt install flameshot
-apt install fdisk
+apt install snapd -y
+apt install snap core -y
+apt install git -y
+apt install terminator -y
+apt install flameshot -y
+apt install fdisk -y
 rkhunter --update
 rkhunter --propupd
 
 apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt install docker-ce docker-compose containerd.io -y
+apt install docker.io docker-compose containerd -y
 systemctl enable docker && sudo systemctl start docker
 usermod -aG docker ben
 
