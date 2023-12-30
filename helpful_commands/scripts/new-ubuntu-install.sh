@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# run this script after a fresh ubuntu install, modify as needed
+
+
 # Function to add SSH public key to authorized_keys
 add_ssh_public_key() {
     # Adds the SSH public key from ~/.ssh/id_rsa.pub to ~/.ssh/authorized_keys,
