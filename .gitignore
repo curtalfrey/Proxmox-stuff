@@ -1,0 +1,88 @@
+# System and temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.*.swp
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Backup files
+*.bak
+*.backup
+*.old
+*_backup
+backup-*
+
+# Environment files (may contain secrets)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+
+# Docker volumes and data
+**/data/
+**/letsencrypt/
+docker-compose.override.yml
+
+# Proxmox specific
+*.qcow2
+*.img
+*.iso
+vzdump-*.tar
+vzdump-*.vma
+vzdump-*.lzo
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Compiled files
+*.pyc
+__pycache__/
+*.class
+*.o
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+
+# OS generated files
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Personal notes (don't commit)
+TODO.txt
+NOTES.txt
+personal-notes.md
+
+# Credentials and secrets
+credentials.yml
+secrets.yml
+passwords.txt
+api-keys.txt
+*.credentials
+
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.zip
+
+# Test files
+test-data/
+test-results/

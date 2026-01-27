@@ -1,9 +1,0 @@
-     # at shell prompt
-
-fdisk /dev/sda
-
-F    # to show unused space
-
-n    # to create new partition
-
-w    # to wirte and quit
