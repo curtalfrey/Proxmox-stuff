@@ -1,11 +1,25 @@
 #!/bin/bash
+# Clone every public repository of a GitHub user: gitcloneall.sh [username]
+# GitHub returns at most 100 repos per page (per_page=1000 is capped at 100), so page
+# through until a page comes back empty.
+set -euo pipefail
 
-# set the username
-username=clusterednetworks
+username="${1:-clusterednetworks}"
 
-# get a list of all repositories for the user
-curl "https://api.github.com/users/$username/repos?per_page=1000" |
-  grep -o '"clone_url":\s*"[^"]*' |
-  awk '{print $2}' |
-  tr -d '"' |
-  xargs -L1 git clone
+page=1
+while :; do
+  urls=$(curl -fsSL "https://api.github.com/users/$username/repos?per_page=100&page=$page" |
+    grep -o '"clone_url":[[:space:]]*"[^"]*' |
+    awk '{print $2}' |
+    tr -d '"' || true)
+  [ -z "$urls" ] && break
+  while read -r url; do
+    dir=$(basename "$url" .git)
+    if [ -d "$dir" ]; then
+      echo "skip $dir (already here)"
+    else
+      git clone "$url"
+    fi
+  done <<< "$urls"
+  page=$((page + 1))
+done

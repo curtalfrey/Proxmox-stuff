@@ -1,4 +1,7 @@
 ---
+# Clone each repository, or fast-forward it if it is already there.
+# Private repos: use an SSH url (git@github.com:USER/REPO.git) with a deploy key on the
+# host, not a password prompt. GitHub no longer accepts account passwords for git.
 - name: Configure and Update Git Repositories
   hosts: all
   remote_user: root
@@ -6,39 +9,31 @@
   vars:
     repositories:
       - name: repository1
+        url: https://github.com/USERNAME/repository1.git
         path: /path/to/repository1
       - name: repository2
+        url: https://github.com/USERNAME/repository2.git
         path: /path/to/repository2
-      # Add more repositories as needed
+        branch: main
+      # Add more repositories as needed (branch defaults to main)
 
   tasks:
-    - name: Ensure the target directories exist
-      file:
-        path: "{{ item.path }}"
+    - name: Ensure the parent directories exist
+      ansible.builtin.file:
+        path: "{{ repo_item.path | dirname }}"
         state: directory
-        recurse: yes
+        mode: "0755"
       loop: "{{ repositories }}"
       loop_control:
         loop_var: repo_item
 
-    - name: Pause for GitHub credentials if private repo
-      pause:
-        prompt: "Enter your GitHub username and password (format: username:password) for '{{ repo_item.name }}': "
-      register: github_credentials
-      when: "'private' in repo_item.name"
-
-    - name: Extract GitHub username and password
-      set_fact:
-        github_username: "{{ github_credentials.user_input.split(':')[0] }}"
-        github_password: "{{ github_credentials.user_input.split(':')[1] }}"
-      when: "'private' in repo_item.name"
-
-    - name: Git Pull from Origin Main for private repo
-      command: git pull origin main
-      args:
-        chdir: "{{ repo_item.path }}"
-      when: "'private' in repo_item.name"
-      environment:
-        GITHUB_USERNAME: "{{ github_username }}"
-        GITHUB_PASSWORD: "{{ github_password }}"
-      no_log: true
+    - name: Clone or fast-forward each repository
+      ansible.builtin.git:
+        repo: "{{ repo_item.url }}"
+        dest: "{{ repo_item.path }}"
+        version: "{{ repo_item.branch | default('main') }}"
+        update: true
+      loop: "{{ repositories }}"
+      loop_control:
+        loop_var: repo_item
+        label: "{{ repo_item.name }}"

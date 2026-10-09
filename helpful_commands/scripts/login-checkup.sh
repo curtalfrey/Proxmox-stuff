@@ -36,7 +36,7 @@ echo ""
 echo "Threats found by ClamAV:"
 echo ""
 echo ""
-grep "Infected files" /var/log/clamav/clamav.log | tail -5
+grep "Infected files" /var/log/clamav/clamscan.log | tail -5
 echo ""
 echo ""
 echo "Threats found by Rootkit Hunter:"

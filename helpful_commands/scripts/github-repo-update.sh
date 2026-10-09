@@ -24,24 +24,28 @@ for repo_url in "${repos[@]}"; do
     repo_path="$github_dir/$repo_name"
 
     # Check if repo directory exists
-    if [ -d "$repo_path" ]; then
+    if [ -d "$repo_path/.git" ]; then
         echo "Updating repository: $repo_name"
-        cd "$repo_path"
-        git pull origin main
+        # Pull the branch that is checked out (not always main); never merge.
+        git -C "$repo_path" pull --ff-only || echo "WARN: $repo_name not updated" >&2
     else
         echo "Cloning repository: $repo_name"
         git clone "$repo_url" "$repo_path"
     fi
 
-    # Configure safe.directory for the repository
-    git config --local --add safe.directory "$repo_path"
+    # safe.directory is only read from global/system config, never from the repo's own
+    # .git/config, so --local did nothing. Add it once, globally.
+    if ! git config --global --get-all safe.directory | grep -qxF "$repo_path"; then
+        git config --global --add safe.directory "$repo_path"
+    fi
 done
 
 # Set Git user identity (global)
 git config --global user.name "$git_username"
 git config --global user.email "$git_email"
 
-# Configure Git to trust the directory
-git config --global credential.helper store
+# Optional: remember HTTPS credentials. "store" keeps them in plain text in
+# ~/.git-credentials; prefer SSH urls or a credential manager.
+# git config --global credential.helper store
 
 echo "Script execution completed."

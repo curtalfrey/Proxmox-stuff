@@ -3,20 +3,22 @@
 # Stop the ClamAV daemon
 systemctl stop clamav-freshclam
 
-# Update the virus definitions
-freshclam -d
+# Update the virus definitions once (-d would start a second freshclam daemon
+# instead of updating and returning)
+freshclam
 
 # Start the ClamAV daemon after updating definitions
 systemctl start clamav-freshclam
 
-# Start the ClamAV scan without requiring Enter key press
-yes | clamscan -r / --log=/var/log/clamav/clamscan.log
+# Scan everything except the kernel/virtual filesystems (clamscan never prompts)
+clamscan -r / --exclude-dir='^/(proc|sys|dev|run)' --log=/var/log/clamav/clamscan.log
 
-# Update rkhunter's properties
-rkhunter --propupd
+# Do NOT run "rkhunter --propupd" here: it would accept any changed (possibly
+# trojaned) binary as the new baseline right before the check. Run --propupd by hand
+# only after an apt upgrade you trust (see 1_clamav_rkhunter_install).
 
-# Start rkhunter check without requiring Enter key press
-yes | rkhunter --check
+# rkhunter check without requiring Enter key press
+rkhunter --check --skip-keypress
 
 
 ##################################################
