@@ -1,1 +1,5 @@
 apt-get update && apt install clamav rkhunter
+
+# One time, right after install (and again only after you have checked a package
+# upgrade): record the rkhunter baseline of system binaries.
+rkhunter --propupd

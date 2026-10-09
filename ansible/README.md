@@ -35,7 +35,9 @@ Collection of ready-to-use Ansible playbooks:
 Update and upgrade all packages on Debian/Ubuntu systems
 
 #### [github-repo-update](playbooks/github-repo-update)
-Automatically update Git repositories
+Automatically clone or fast-forward Git repositories (`ansible.builtin.git`).
+Each entry in `repositories` needs `name`, `url` and `path`; `branch` defaults to `main`.
+Use SSH urls with a deploy key for private repos.
 
 #### [install-new-vm-programs](playbooks/install-new-vm-programs)
 Install standard software on new VMs

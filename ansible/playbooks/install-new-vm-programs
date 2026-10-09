@@ -56,15 +56,19 @@
   remote_user: root
 
   tasks:
+    # /etc/ssh and the global ssh_known_hosts must stay world-readable: every user's
+    # ssh client reads them (Debian/Ubuntu ship 0755 / 0644). Only ~/.ssh is 0700.
     - name: Ensure SSH directories and files exist
       ansible.builtin.file:
-        path: "{{ item }}"
-        state: "{{ 'directory' if item.endswith('.ssh') else 'touch' }}"
-        mode: "{{ '0700' if item.endswith('.ssh') else '0600' }}"
+        path: "{{ item.path }}"
+        state: "{{ item.state }}"
+        mode: "{{ item.mode }}"
+        access_time: "{{ 'preserve' if item.state == 'touch' else omit }}"
+        modification_time: "{{ 'preserve' if item.state == 'touch' else omit }}"
       loop:
-        - /home/ansible/.ssh
-        - /root/.ssh
-        - /etc/ssh
-        - /etc/ssh/ssh_known_hosts
+        - { path: /home/ansible/.ssh, state: directory, mode: "0700" }
+        - { path: /root/.ssh, state: directory, mode: "0700" }
+        - { path: /etc/ssh, state: directory, mode: "0755" }
+        - { path: /etc/ssh/ssh_known_hosts, state: touch, mode: "0644" }
       tags:
         - ssh_known_hosts

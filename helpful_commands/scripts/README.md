@@ -24,6 +24,7 @@ Before running any script:
   - Timestamped backups
   
 - **[restore_from_backup.sh](restore_from_backup.sh)** - Restore from backup archives
+  - Usage: `restore_from_backup.sh <backup.tar.gz.enc> [restore_dir]`
   - Extract backup files
   - Restore to original locations
   - Verify restoration
@@ -72,6 +73,7 @@ Before running any script:
   - Update multiple repositories
 
 - **[gitcloneall.sh](gitcloneall.sh)** - Clone multiple repositories
+  - Usage: `gitcloneall.sh <github-username>` (pages through all public repos)
   - Clone from list
   - Organize by project
   - Batch operations
